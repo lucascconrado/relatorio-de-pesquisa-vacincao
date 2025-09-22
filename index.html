@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/vacina_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Vacinação em Nova Iguaçu</title>
+</head>
+<body>
+
+    <header>
+        <h1>Vacinação em Nova Iguaçu</h1>
+        <p>Seu guia rápido para locais e horários de vacinação contra Dengue e Influenza.</p>
+        <img id="doutora1" src="img/doutora1.webp" alt="Doutora1">
+    </header>
+
+    <main>
+        <section id="vacinas">
+            <h2>Locais e Horários de Vacinação</h2>
+            <p>Este relatório apresenta informações sobre a vacinação contra Dengue (Qdenga) e Influenza (Gripe) em unidades de saúde de Nova Iguaçu.</p>
+
+            <div class="filter-container">
+                <label for="filtro-vacina">Filtrar por vacina:</label>
+                <select id="filtro-vacina">
+                    <option value="todas">Todas</option>
+                    <option value="dengue">Dengue</option>
+                    <option value="influenza">Influenza</option>
+                </select>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unidade de Saúde</th>
+                        <th>Endereço</th>
+                        <th>Dias de Atendimento</th>
+                        <th>Horário</th>
+                        <th class="vacina-dengue">Vacina Dengue</th>
+                        <th class="vacina-influenza">Vacina Influenza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Centro de Saúde Vasco Barcelos</td>
+                        <td>Rua Bernardino de Mello, 1825 - Centro</td>
+                        <td>Seg. a Sex. e Sáb. e Dom.</td>
+                        <td>Seg. a Sex.: 8h30 às 17h | Sáb. e Dom.: 8h30 às 16h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>Policlínica do Shopping Nova Iguaçu</td>
+                        <td>Av. Abílio Augusto Távora, 1111- Luz</td>
+                        <td>Todos os dias</td>
+                        <td>8h às 20h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>Clínica da Família Vila Operária</td>
+                        <td>Rua Nair Dias, 880 - Vila Operária</td>
+                        <td>Seg. a Sex.</td>
+                        <td>8h30 às 22h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>Clínica da Família Odiceia Morais</td>
+                        <td>Rua Bolívia, s/nº Centro</td>
+                        <td>Seg. a Sex.</td>
+                        <td>8h30 às 17h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>Clínica da Família Jardim da Viga</td>
+                        <td>Estrada do Iguaçu, 171- Da Viga</td>
+                        <td>Seg. a Sex.</td>
+                        <td>8h30 às 17h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>USF Padre Manuel Monteiro (Caonze)</td>
+                        <td>Rua Benjamim Chambarelli, 239 - Caonze</td>
+                        <td>Seg. a Sex.</td>
+                        <td>8h30 às 17h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>UBS da Cerâmica</td>
+                        <td>Estrada de Santana, 155 - Cerâmica</td>
+                        <td>Seg. a Sex.</td>
+                        <td>8h30 às 17h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>USF Engenho Pequeno</td>
+                        <td>Rua Olga Veloso, 36- Vila Operária</td>
+                        <td>Seg. a Sex.</td>
+                        <td>8h30 às 17h</td>
+                        <td>10 a 14 anos</td>
+                        <td>A partir de 6 meses</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+<section id="mapa-geral">
+    <h2>Confira os locais no mapa</h2>
+    <p>Todos os pontos de vacinação de Nova Iguaçu no mesmo mapa. Clique nos ícones para ver os detalhes de cada local.</p>
+    <iframe src="https://www.google.com/maps/d/embed?mid=1ub4wELnUNzJd7vhsQX1G7h5d2LCWYSE&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+
+</section>
+
+        <section id="analise">
+            <h2>Análise dos Resultados</h2>
+            <p>A pesquisa demonstrou que Nova Iguaçu dispõe de uma rede de unidades de vacinação ampla e distribuída.</p>
+            <ul>
+                <li>A rede de vacinação tem boa cobertura territorial, contemplando a região central e bairros mais afastados.</li>
+                <li>Algumas unidades têm horário estendido, como a Clínica da Família Vila Operária (até 22h), facilitando o acesso da população trabalhadora.</li>
+                <li>A Policlínica do Shopping Nova Iguaçu é a única unidade aberta todos os dias até as 20h, sendo um ponto estratégico para finais de semana e feriados.</li>
+                <li>A vacina contra a Dengue (Qdenga) é disponibilizada para adolescentes de 10 a 14 anos, seguindo as diretrizes do Ministério da Saúde.</li>
+                <li>A vacina contra a Influenza (Gripe) é oferecida para a população a partir dos 6 meses de idade.</li>
+            </ul>
+        </section>
+
+        <section id="sobre">
+            <h2>Sobre o Projeto</h2>
+            <p>Este site foi criado com base em um Projeto de Extensão Integrador em Doenças Infecciosas Reemergentes, da Universidade Iguaçu - UNIG.</p>
+            <p>O trabalho foi realizado por:</p>
+            <ul>
+                <li>Thauane De Aguiar Porn</li>
+                <li>Ana Fagundes Carneiro</li>
+                <li>Ana Júlia Machado da Costa</li>
+                <li>Thaynara Cristine Venâncio de Almeida</li>
+                <li>Thullyane De Faria Sabino</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Nova Iguaçu, 2025.</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
