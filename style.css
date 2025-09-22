@@ -250,3 +250,20 @@ nav a {
     font-weight: 500;
     transition: opacity 0.3s ease;
 }
+
+#voltar-topo {
+  position:  center;
+    text-align: center;
+    margin: 20px 0;
+
+    button {
+        background-color: #39b8f3;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        transition: background-color 0.3s ease;
+    }
+}
