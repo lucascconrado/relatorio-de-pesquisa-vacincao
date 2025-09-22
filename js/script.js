@@ -6,3 +6,5 @@ doutora1.addEventListener('mouseenter', () => {
 doutora1.addEventListener('mouseleave', () => {
     doutora1.src = 'img/doutora1.webp';
 });
+
+

@@ -231,3 +231,22 @@ img#doutora1{
     border: 1px solid #ddd;  /* Borda cinza clara e sutil */
     border-radius: 20px;      /* Cantos arredondados para o próprio mapa */
 }
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
