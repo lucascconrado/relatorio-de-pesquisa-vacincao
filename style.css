@@ -267,3 +267,61 @@ nav a {
         transition: background-color 0.3s ease;
     }
 }
+
+
+/* ========================================================== */
+/* Estilos para a Linha de Detalhes Expansível        */
+/* ========================================================== */
+
+/* Deixa as linhas de dados com um cursor de "mãozinha" para indicar que são clicáveis */
+/* O :not() serve para não aplicar o cursor na própria linha de detalhes */
+tbody tr:not(.linha-detalhes) {
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+/* Esconde a linha de detalhes por padrão */
+.linha-detalhes {
+    display: table-row;
+}
+
+/* Estiliza a aparência do box de conteúdo */
+.box-detalhes {
+    padding: 10px;
+    background-color: #e6e6e6;
+    border-top: 2px solid #39b8f3; /* Uma borda azul para destacar */
+}
+
+.box-detalhes p {
+    margin: 2 0 0.5rem 0; /* Ajusta o espaçamento do parágrafo */
+}
+
+/* Estiliza o link do Google Maps */
+.box-detalhes a {
+    display: inline-block;
+    background-color: #39b8f3;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ESTADO NORMAL - quando o mouse NÃO está em cima */
+.box-detalhes a {
+    display: inline-block;
+    background-color: #39b8f3;  /* Azul */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    
+    /* ISSO AQUI É IMPORTANTE: */
+    transition: background-color 0.5s ease;
+}
+
+/* ESTADO HOVER - quando o mouse ESTÁ em cima */
+.box-detalhes a:hover {
+    background-color: #f38439;  /* Laranja */
+}
