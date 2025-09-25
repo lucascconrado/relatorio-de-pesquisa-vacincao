@@ -29,7 +29,8 @@
             <h2>Locais e Horários de Vacinação</h2>
             <p>Este relatório apresenta informações sobre a vacinação contra Dengue (Qdenga) e Influenza (Gripe) em unidades de saúde de Nova Iguaçu.</p>
 
-            <table>
+            <div class="table-container">
+                 <table id="tabela-vacinacao">
                 <thead>
                     <tr>
                         <th>Unidade de Saúde</th>
@@ -176,8 +177,10 @@
             </div>
         </td>
     </tr>
+
 </tbody>
             </table>
+            <div id="cards-mobile" class="mobile-cards"></div>
         </section>
 
         <section id="mapa-geral">
@@ -198,6 +201,8 @@
             </ul>
         </section>
 
+
+        
         <section id="sobre">
     <h2>Sobre o Projeto</h2>
     <p>Este site foi criado com base em um Projeto de Extensão Integrador em Doenças Infecciosas Reemergentes, da Universidade Iguaçu - UNIG.</p>
@@ -217,7 +222,7 @@
     <footer>
         <p>Nova Iguaçu, 2025.</p>
     </footer>
-
+<!--Script para funcionalidade responsivas-->
     <script src="js/script.js"></script>
 </body>
 </html>
