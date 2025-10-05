@@ -440,6 +440,42 @@ tbody tr:not(.linha-detalhes):hover {
     background: #0b80b6;
 }
 
+/*
+/* ========================================================== */
+/* ESTILOS ESPECÍFICOS PARA OS BOTÕES DENTRO DO CARD MOBILE */
+/* ========================================================== */
+
+.detalhes-card p a {
+    /* Estilo para o link do Mapa dentro do p */
+    display: block; /* Ocupa a largura total */
+    text-align: center;
+    background-color: #f38439; /* Cor Laranja (accent-color) */
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.detalhes-card p a:hover {
+    background-color: #d16e2d; /* Laranja mais escuro no hover/touch */
+}
+
+.detalhes-card strong a {
+    /* Estilo para o link de telefone (opcionalmente) */
+    color: #024188; /* Mantém a cor original do texto, mas remove o sublinhado */
+    text-decoration: none; 
+}
+
+.detalhes-card strong a:hover {
+    text-decoration: underline;
+}
+
+
 /* ========================================================== */
 /* MEDIA QUERY PARA MOBILE - Aqui a mágica acontece */
 /* ========================================================== */
@@ -579,3 +615,9 @@ tbody tr:not(.linha-detalhes):hover {
         display: table;
     }
 }
+
+.sobre-projetos{
+         display: block;
+        text-align: center;
+        padding: 12px;
+    }

@@ -135,3 +135,46 @@ function mostrarDetalhesMobile(index) {
         detalhes.style.display = 'block';
     }
 }
+
+
+// ========================================================== 
+// 3. FUNÇÃO PARA DETALHES MOBILE - Versão Otimizada
+// ========================================================== 
+
+function mostrarDetalhesMobile(index) {
+    const detalhes = document.getElementById(`detalhes-mobile-${index}`);
+    const botao = document.querySelector(`.card-unidade:nth-child(${index + 1}) .btn-detalhes`);
+    const estaVisivel = detalhes.style.display !== 'none';
+    
+    // Esconder todos os detalhes primeiro e resetar o texto do botão
+    document.querySelectorAll('.detalhes-card').forEach((d, i) => {
+        d.style.display = 'none';
+        document.querySelector(`.card-unidade:nth-child(${i + 1}) .btn-detalhes`).textContent = '📞 Ver Contato & Mapa';
+    });
+    
+    // Mostrar/ocultar os detalhes clicados
+    if (!estaVisivel) {
+        const tabela = document.getElementById('tabela-vacinacao');
+        const linhaDetalhes = tabela.querySelectorAll('tbody tr.linha-detalhes')[index];
+        
+        if (linhaDetalhes) {
+            // 1. Extrai o texto do Contato e formata como link tel:
+            const contatoTexto = linhaDetalhes.querySelector('p')?.textContent.replace('Contato:', '').trim() || 'Não disponível';
+            const contatoTelefone = contatoTexto.replace(/\D/g, ''); // Remove todos os não-dígitos
+            const contatoHTML = `<strong>Contato: <a href="tel:${contatoTelefone}">${contatoTexto}</a></strong>`;
+            
+            // 2. Extrai o link do Mapa
+            const linkMapaElement = linhaDetalhes.querySelector('a');
+            const linkMapaHTML = linkMapaElement ? linkMapaElement.outerHTML.replace('Localização no maps.', 'Abrir no Google Maps 🗺️') : 'Mapa não disponível';
+
+            // 3. Monta o HTML no detalhes-card
+            detalhes.innerHTML = `
+                <p>${contatoHTML}</p>
+                <p>${linkMapaHTML}</p>
+            `;
+        }
+        
+        detalhes.style.display = 'block';
+        botao.textContent = '👆 Fechar Detalhes';
+    }
+}
