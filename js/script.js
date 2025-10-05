@@ -104,85 +104,10 @@ function adaptarParaDesktop() {
     });
 }
 
-// ========================================================== 
-// 3. FUNÇÃO PARA DETALHES MOBILE
-// ========================================================== 
-
-function mostrarDetalhesMobile(index) {
-    const detalhes = document.getElementById(`detalhes-mobile-${index}`);
-    const estaVisivel = detalhes.style.display !== 'none';
-    
-    // Esconder todos os detalhes primeiro
-    document.querySelectorAll('.detalhes-card').forEach(d => {
-        d.style.display = 'none';
-    });
-    
-    // Mostrar/ocultar os detalhes clicados
-    if (!estaVisivel) {
-        const tabela = document.getElementById('tabela-vacinacao');
-        const linhaDetalhes = tabela.querySelectorAll('tbody tr.linha-detalhes')[index];
-        
-        if (linhaDetalhes) {
-            const contato = linhaDetalhes.querySelector('p')?.textContent || 'Contato não disponível';
-            const linkMapa = linhaDetalhes.querySelector('a')?.outerHTML || 'Mapa não disponível';
-            
-            detalhes.innerHTML = `
-                <p><strong>${contato}</strong></p>
-                <p>${linkMapa}</p>
-            `;
-        }
-        
-        detalhes.style.display = 'block';
-    }
-}
-
+// REMOVIDA A FUNÇÃO ANTIGA E COMENTADA
 
 // ========================================================== 
-// 3. FUNÇÃO PARA DETALHES MOBILE - Versão Otimizada
-// ========================================================== 
-
-/*
-
-function mostrarDetalhesMobile(index) {
-    const detalhes = document.getElementById(`detalhes-mobile-${index}`);
-    const botao = document.querySelector(`.card-unidade:nth-child(${index + 1}) .btn-detalhes`);
-    const estaVisivel = detalhes.style.display !== 'none';
-    
-    // Esconder todos os detalhes primeiro e resetar o texto do botão
-    document.querySelectorAll('.detalhes-card').forEach((d, i) => {
-        d.style.display = 'none';
-        document.querySelector(`.card-unidade:nth-child(${i + 1}) .btn-detalhes`).textContent = '📞 Ver Contato & Mapa';
-    });
-    
-    // Mostrar/ocultar os detalhes clicados
-    if (!estaVisivel) {
-        const tabela = document.getElementById('tabela-vacinacao');
-        const linhaDetalhes = tabela.querySelectorAll('tbody tr.linha-detalhes')[index];
-        
-        if (linhaDetalhes) {
-            // 1. Extrai o texto do Contato e formata como link tel:
-            const contatoTexto = linhaDetalhes.querySelector('p')?.textContent.replace('Contato:', '').trim() || 'Não disponível';
-            const contatoTelefone = contatoTexto.replace(/\D/g, ''); // Remove todos os não-dígitos
-            const contatoHTML = `<strong>Contato: <a href="tel:${contatoTelefone}">${contatoTexto}</a></strong>`;
-            
-            // 2. Extrai o link do Mapa
-            const linkMapaElement = linhaDetalhes.querySelector('a');
-            const linkMapaHTML = linkMapaElement ? linkMapaElement.outerHTML.replace('Localização no maps.', 'Abrir no Google Maps 🗺️') : 'Mapa não disponível';
-
-            // 3. Monta o HTML no detalhes-card
-            detalhes.innerHTML = `
-                <p>${contatoHTML}</p>
-                <p>${linkMapaHTML}</p>
-            `;
-        }
-        
-        detalhes.style.display = 'block';
-        botao.textContent = '👆 Fechar Detalhes';
-    }
-} */ 
-
-// ========================================================== 
-// 3. FUNÇÃO PARA DETALHES MOBILE - Versão CORRIGIDA para iOS/Safari
+// 3. FUNÇÃO PARA DETALHES MOBILE - Versão CORRIGIDA FINAL (Resolve duplicação no Safari)
 // ========================================================== 
 
 function mostrarDetalhesMobile(index) {
@@ -193,7 +118,11 @@ function mostrarDetalhesMobile(index) {
     // Esconder todos os detalhes primeiro e resetar o texto do botão
     document.querySelectorAll('.detalhes-card').forEach((d, i) => {
         d.style.display = 'none';
-        document.querySelector(`.card-unidade:nth-child(${i + 1}) .btn-detalhes`).textContent = '📞 Ver Contato & Mapa';
+        // Seleciona o botão correspondente para resetar o texto
+        const currentButton = document.querySelector(`.card-unidade:nth-child(${i + 1}) .btn-detalhes`);
+        if (currentButton) {
+            currentButton.textContent = '📞 Ver Contato & Mapa';
+        }
     });
     
     // Mostrar/ocultar os detalhes clicados
@@ -203,29 +132,39 @@ function mostrarDetalhesMobile(index) {
         
         if (linhaDetalhes) {
             // 1. Extrai o texto do Contato e formata como link tel:
-            const contatoTexto = linhaDetalhes.querySelector('p')?.textContent.replace('Contato:', '').trim() || 'Não disponível';
-            const contatoTelefone = contatoTexto.replace(/\D/g, ''); // Remove todos os não-dígitos
+            const contatoElement = linhaDetalhes.querySelector('p');
+            const contatoTextoCru = contatoElement ? contatoElement.textContent.replace('Contato:', '').trim() : 'Não disponível';
+            const contatoTelefone = contatoTextoCru.replace(/\D/g, ''); // Remove todos os não-dígitos
+            
             const contatoHTML = `
-                <p>
+                <p style="margin-bottom: 10px;">
                     <strong style="color: var(--text-color);">
                         Contato: 
-                        <a href="tel:${contatoTelefone}" style="text-decoration: none; color: var(--text-color);">
-                            ${contatoTexto}
+                        <a href="tel:${contatoTelefone}" style="text-decoration: none; color: var(--primary-color); font-weight: bold;">
+                            ${contatoTextoCru}
                         </a>
                     </strong>
                 </p>
             `;
             
-            // 2. Extrai o link do Mapa e garante que ele tenha o texto de botão e o estilo de destaque
+            // 2. Extrai o link do Mapa.
             const linkMapaElement = linhaDetalhes.querySelector('a');
             let linkMapaHTML = 'Mapa não disponível';
 
             if (linkMapaElement) {
-                 // Usa o outerHTML e substitui o texto para ser um botão chamativo
-                linkMapaHTML = linkMapaElement.outerHTML.replace('Localização no maps.', 'Abrir no Google Maps 🗺️');
+                // Cria a tag <a> completamente nova e estilizada como botão,
+                // sem depender do outerHTML que pode conter o texto original.
+                const href = linkMapaElement.getAttribute('href');
+                const target = linkMapaElement.getAttribute('target');
+                
+                linkMapaHTML = `
+                    <a target="${target}" href="${href}">
+                        Abrir no Google Maps 🗺️
+                    </a>
+                `;
             }
 
-            // 3. Monta o HTML FINAL (Contato e depois o botão Mapa)
+            // 3. Monta o HTML FINAL, garantindo que o link do mapa NÃO esteja aninhado em um <p>.
             detalhes.innerHTML = `
                 ${contatoHTML}
                 ${linkMapaHTML}
