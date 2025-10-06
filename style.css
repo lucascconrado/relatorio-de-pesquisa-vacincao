@@ -65,14 +65,6 @@ footer {
     margin-top: 2rem;
 }
 
-.aviso {
-    text-align: center;
-    width: 100%;
-    margin: 1rem auto;
-    padding: 0 1rem;
-   
-}
-
 /* ========================================================== */
 /* 3. COMPONENTES ESPECÍFICOS (MOBILE-FIRST)                 */
 /* ========================================================== */
@@ -475,7 +467,7 @@ tbody tr:not(.linha-detalhes):hover {
 
 .detalhes-card strong a {
     /* Estilo para o link de telefone (opcionalmente) */
-    color: #024188; /* Mantém a cor original do texto, mas remove o sublinhado */
+    color: white;/* Mantém a cor original do texto, mas remove o sublinhado */ 
     text-decoration: none; 
 }
 
@@ -629,3 +621,54 @@ tbody tr:not(.linha-detalhes):hover {
         text-align: center;
         padding: 12px;
     }
+
+
+.aviso {
+    /* 1. POSICIONAMENTO E CAMADA (CRÍTICO PARA MARCA D'ÁGUA) */
+    position:absolute; /* Tira do fluxo e fixa na tela */
+    bottom: 20px;    /* Posição: 20px acima da borda inferior */
+    right: 20px;    /* Posição: 20px da borda direita */
+    left: 20px;
+    z-index: 1000;   /* Garante que fique acima de outros elementos */
+    
+    /* 2. DISCRETUDE (TRANSLUCIDEZ) */
+    opacity: 0.3; /* Deixa 60% visível (você pode ajustar entre 0.1 e 0.9) */
+    
+    /* 3. APARÊNCIA */
+    background-color: var(--white); /* Fundo branco ou a cor principal */
+    color: var(--text-color);       /* Texto escuro padrão */
+    border: 1px solid #ccc;
+    
+    /* 4. FORMATO */
+    padding: 8px 12px;
+    margin: 0; 
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.8rem; /* Fonte menor para discrição */
+    
+    /* 5. EFEITO HOVER (Para ficar visível ao passar o mouse) */
+    transition: opacity 0.3s ease;
+
+
+    /* ... outras propriedades de estilo ... */
+    transition: opacity 0.5s ease; /* CRÍTICO: Para o efeito de sumir ser suave */
+    opacity: 1.0; /* Começa totalmente visível */
+}
+
+
+
+.aviso:hover {
+    opacity: 1.0; /* Fica totalmente visível (100%) quando o mouse está sobre ele */
+    cursor: default; /* Remove o cursor de link */
+}
+
+/* --- (OPCIONAL: Estilo para telas muito pequenas) --- */
+@media (max-width: 400px) {
+    .aviso {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.75rem;
+        /* Ajuda a respeitar a barra de navegação do celular */
+        right: calc(10px + env(safe-area-inset-right));
+    }
+}
