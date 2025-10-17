@@ -1,366 +1,189 @@
 // ========================================================== 
-// SISTEMA DE RESPONSIVIDADE + FUNÇÃO DA GAVETA DA TABELA
+// 1. DADOS DE VACINAÇÃO (Array Central)
+// ========================================================== 
+const POSTOS_DE_VACINACAO = [
+    { 
+        unidade: "Centro de Saúde Vasco Barcelos", 
+        endereco: "Rua Bernardino de Mello, 1825 - Centro",
+        dias: "Seg. a Sex. e Sáb. e Dom.",
+        horario: "Seg. a Sex.: 8h30 às 17h | Sáb. e Dom.: 8h30 às 16h",
+        dengue: "10 a 14 anos",
+        influenza: "A partir de 6 meses",
+        contato: "(21) 2698-2440",
+        link_maps: "https://www.google.com/maps/place/Centro+de+Sa%C3%BAde+Vasco+Barcelos/@-22.7614942,-43.4498879,15z/data=!4m16!1m9!3m8!1s0x996701416b7a57:0xbd28f6f47ec27266!2sR.+Cel.+Bernardino+de+Melo,+1825+-+Centro,+Nova+Igua%C3%A7u+-+RJ,+26255-140!3b1!8m2!3d-22.7614297!4d-43.4490365!10e5!16s%2Fg%2F11pw2d1b6v!3m5!1s0x99670152c49fa7:0x1dfe2eda83b10d70!8m2!3d-22.7614942!4d-43.4498879!16s%2Fg%2F1tgnbt_5?entry=ttu&g_ep=EgoyMDI1MDkyMS4wIKXMDSoASAFQAw%3D%3D" 
+    },
+    { 
+        unidade: "Policlínica do Shopping Nova Iguaçu (2º andar)", 
+        endereco: "Av. Abílio Augusto Távora, 1111- Luz",
+        dias: "Todos os dias",
+        horario: "8h às 20h",
+        dengue: "10 a 14 anos",
+        influenza: "A partir de 6 meses",
+        contato: "(21) 97102-1410",
+        link_maps: "https://www.google.com/maps/place/Av.+Ab%C3%ADlio+Augusto+T%C3%A1vora,+1111+-+Luz,+Nova+Igua%C3%A7u+-+RJ,+26255-620/@-22.763303,-43.4678129,17z/data=!3m1!4b1!4m6!3m5!1s0x99676d3b7ed0f9:0xfb68da3ec28b0cb3!8m2!3d-22.763308!4d-43.4652326!16s%2Fg%2F11cs5snlzq?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D" 
+    },
+    {
+        unidade: "Clínica da Família Vila Operária",
+        endereco: "Rua Nair Dias, 880- Vila Operária",
+        dias: "Seg. a Sex.",
+        horario:"8h30 às 22h",
+        dengue:"10 a 14anos",
+        influenza:"A partir de 6 meses",
+        contato:"(21) 2658-6929",
+        link_maps:"https://www.google.com.br/maps/place/Rua+Nair+Dias,+880+-+Vila+Oper%C3%A1ria,+Nova+Igua%C3%A7u+-+RJ,+26012-451/@-22.7360086,-43.4357719,18z/data=!4m6!3m5!1s0x99663a7deacc07:0x95b44e3e54a07f97!8m2!3d-22.7361487!4d-43.4352406!16s%2Fg%2F11lwchbkln?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+        unidade: "Clínica da Família Odiceia Morais",
+        endereco: "Rua Bolívia, s/nº Centro",
+        dias: "Seg. a Sex",
+        horario: "8h30 às 17h",
+        dengue: "10 a 14 anos",
+        influenza: "A partir de 6 meses",
+        contato: "(21) 2668-8088",
+        link_maps: "https://www.google.com/maps/place/Cl%C3%ADnica+da+Fam%C3%ADlia+Odic%C3%A9ia+Morais/@-22.7504177,-43.4458015,17z/data=!4m6!3m5!1s0x996652bb1bc911:0x52e9799755d627e0!8m2!3d-22.7509421!4d-43.4449861!16s%2Fg%2F11bw519lwl?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+        unidade:"Clínica da Família Jardim da Viga",
+        endereco:"Estrada do Iguaçu, 171- Da Viga",
+        dias: "Seg. a Sex.",
+        horario: "8h30 às 17h",
+        dengue: "10 a 14 anos",
+        influenza: "A partir de 6 meses",
+        contato: "(21) 2668-4615",
+        link_maps: "https://www.google.com/maps/place/Cl%C3%ADnica+da+Fam%C3%ADlia+Jardim+Viga/@-22.7447911,-43.4388384,15z/data=!4m6!3m5!1s0x156196934274a13:0x1344ae47a88395da!8m2!3d-22.7446825!4d-43.438941!16s%2Fg%2F11b7gmyzz0?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+        unidade:"USF Padre Manuel Monteiro (Caonze)",
+        endereco:"Rua Benjamim Chambarelli, 239 - Caonze",
+        dias:"Seg. a Sex.",
+        horario:"8h30 às 17h",
+        dengue:"10 a 14 anos",
+        influenza:"A partir de 6 meses",
+        contato:"(21) 2668-7358",
+        link_maps:"https://www.google.com/maps/place/Posto+De+Saude+Padre+Manoel+Monteiro+K11/@-22.7675773,-43.4401551,19.71z/data=!4m15!1m8!3m7!1s0x9966fb838a1a99:0x9d908c92654053b1!2sR.+Benjamim+Chambarelli,+239+-+Caonze,+Nova+Igua%C3%A7u+-+RJ,+26250-210!3b1!8m2!3d-22.7675037!4d-43.439953!16s%2Fg%2F11c4kh63gh!3m5!1s0x9967de1c5425cf:0x991ed1fe95b31bb!8m2!3d-22.7675993!4d-43.4399677!16s%2Fg%2F11jb4lj1z1?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+        unidade: "UBS da Cerâmica",
+        endereco:"Estrada de Santana, 155 - Cerâmica",
+        dias:"Seg. a Sex.",
+        horario:"8h30 às 17h",
+        dengue:"10 a 14 anos",
+        influenza:"A partir de 6 meses",
+        contato:"(21) 3776-9997",
+        link_maps:"https://www.google.com/maps/place/Unidade+B%C3%A1sica+de+Sa%C3%BAde+Cer%C3%A2mica/@-22.7347702,-43.4878613,18.83z/data=!4m15!1m8!3m7!1s0x995d634c70e4d9:0x2ed86b757b0322ce!2sEstr.+de+Santana,+155+-+Cer%C3%A2mica,+Nova+Igua%C3%A7u+-+RJ,+26082-035!3b1!8m2!3d-22.7348722!4d-43.4876649!16s%2Fg%2F11j8sk3wdr!3m5!1s0x995d72481a05af:0x65c6ee56d9232a3a!8m2!3d-22.734883!4d-43.48771!16s%2Fg%2F1tcyyn88?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+        unidade: "USF Engenho Pequeno",
+        endereco: "Rua Olga Veloso, 36- Vila Operária",
+        dias: "Seg. a Sex.",
+        horario:"8h30 às 17h",
+        dengue:"10 a 14 anos",
+        influenza: "A partir de 6 meses",
+        contato: "(21) 3778-4472",
+        link_maps:"https://www.google.com/maps/place/USF%2FPosto+de+Sa%C3%BAde+-+Engenho+Pequeno/@-22.7430386,-43.4497729,15z/data=!4m6!3m5!1s0x996638c19fa40b:0x5fcc5d38fa6fbeb9!8m2!3d-22.7430386!4d-43.4317485!16s%2Fg%2F11b7w9j7xz?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D"
+    },
+];
+
+
+// ==========================================================
+// 2. FUNÇÃO: GERA E INJETA TODOS OS CARDS (Substitui toda a lógica de adaptação)
+// ==========================================================
+function construirCardsVacinacao() {
+    const container = document.getElementById('cards-container-js');
+    if (!container) return; 
+
+    container.innerHTML = ''; // Limpa o container antes de preencher
+
+    POSTOS_DE_VACINACAO.forEach((posto, index) => {
+        const cardHTML = `
+            <div class="card-unidade" onclick="toggleDetalhes(${index})">
+                <h3>${posto.unidade}</h3>
+                <p><strong>📍 Endereço:</strong> ${posto.endereco}</p>
+                <p><strong>📅 Dias:</strong> ${posto.dias}</p>
+                <p><strong>⏰ Horário:</strong> ${posto.horario}</p>
+                <p class="vacina-info"><strong>💉 Dengue:</strong> ${posto.dengue}</p>
+                <p class="vacina-info"><strong>🦠 Influenza:</strong> ${posto.influenza}</p>
+
+                <button class="btn-detalhes-toggle">Ver Contato & Mapa</button>
+
+                <div id="detalhes-posto-${index}" class="detalhes-card-final" style="display: none;">
+                    <p>Contato:</p>
+                    <div class="detalhe-content-wrapper">
+                        <div class="btn-detalhe-wrapper contato-btn">
+                            <a href="tel:${posto.contato.replace(/\D/g, '')}">
+                                ${posto.contato}
+                            </a>
+                        </div>
+                        <div class="btn-detalhe-wrapper mapa-btn">
+                            <a target="_blank" href="${posto.link_maps}">
+                                Abrir no Google Maps 🗺️
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.innerHTML += cardHTML;
+    });
+}
+
+
+// ==========================================================
+// 3. FUNÇÃO: ABRE/FECHA DETALHES DO CARD (Nova Gaveta)
+// ==========================================================
+function toggleDetalhes(index) {
+    const detalhes = document.getElementById(`detalhes-posto-${index}`);
+    const card = document.querySelector(`#cards-container-js .card-unidade:nth-child(${index + 1})`);
+    
+    if (!detalhes || !card) return;
+
+    const estaVisivel = detalhes.style.display !== 'none';
+    
+    // 1. Fecha todas as outras gavetas
+    document.querySelectorAll('.detalhes-card-final').forEach(d => {
+        if (d.id !== `detalhes-posto-${index}`) {
+            d.style.display = 'none';
+            d.parentElement.classList.remove('open');
+            d.parentElement.querySelector('.btn-detalhes-toggle').textContent = 'Ver Contato & Mapa';
+        }
+    });
+
+    // 2. Abre/Fecha a gaveta clicada
+    const toggleButton = card.querySelector('.btn-detalhes-toggle');
+
+    if (estaVisivel) {
+        detalhes.style.display = 'none';
+        card.classList.remove('open');
+        toggleButton.textContent = 'Ver Contato & Mapa';
+    } else {
+        detalhes.style.display = 'block';
+        card.classList.add('open');
+        toggleButton.textContent = 'Fechar Detalhes';
+    }
+}
+
+
+// ========================================================== 
+// 4. INICIALIZAÇÃO ÚNICA (window.onload)
 // ========================================================== 
 
 window.onload = function() {
-        window.scrollTo(0, 0); 
-    // 1. LÓGICA DO ALERTA DISCRETO E TEMPORÁRIO (Seu Pedido)
-    const alerta = document.getElementById('alerta-experiencia');
+    window.scrollTo(0, 0); 
     
+    // Alerta Temporário
+    const alerta = document.getElementById('alerta-experiencia');
     if (alerta) {
-        // Faz o banner aparecer (garante que a "gaveta" de aviso abre)
         alerta.style.display = 'block'; 
-        alerta.style.opacity = '1'; // Garante que a opacidade inicial seja 1
+        alerta.style.opacity = '1';
 
-        // Define que sumirá após 5 segundos (5000ms)
         setTimeout(() => {
-            // Inicia a transição para sumir suavemente
             alerta.style.opacity = '0';
-            
-            // Depois de 500ms (para a transição terminar), esconde totalmente
             setTimeout(() => {
                 alerta.style.display = 'none';
             }, 500); 
-
         }, 5000); 
     }
     
-    // 2. INICIALIZAÇÃO DAS FUNÇÕES ESSENCIAIS (RESTAURADO)
-    
-    // Inicializa as funções do seu layout (tabela, cards, etc.)
-    adaptarLayout();
-    inicializarSistemaGaveta();
-    
-    // Configura o evento de redimensionamento
-    window.addEventListener('resize', adaptarLayout);
+    // Constrói os cards imediatamente - ISSO AGORA ESTÁ GARANTIDO
+    construirCardsVacinacao(); 
 };
-
-// ========================================================== 
-// 3. SISTEMA DA GAVETA (PC) - MANTIDO
-// ========================================================== 
-
-function inicializarSistemaGaveta() {
-    const linhasClicaveis = document.querySelectorAll('tbody tr:not(.linha-detalhes)');
-
-    linhasClicaveis.forEach(linha => {
-        linha.addEventListener('click', () => {
-            // Só funciona no desktop (largura > 768px)
-            if (window.innerWidth > 768) {
-                const boxDetalhes = linha.nextElementSibling.querySelector('.box-detalhes');
-                
-                // Fechar todas as outras gavetas
-                document.querySelectorAll('.box-detalhes').forEach(box => {
-                    if (box !== boxDetalhes) {
-                        box.classList.remove('open');
-                        box.parentElement.parentElement.previousElementSibling?.classList.remove('linha-ativa');
-                    }
-                });
-                
-                // Abrir/fechar esta gaveta
-                boxDetalhes.classList.toggle('open');
-                linha.classList.toggle('linha-ativa');
-            }
-        });
-    });
-}
-
-// ========================================================== 
-// 4. SISTEMA RESPONSIVO (MOBILE) - CRÍTICO PARA EXIBIÇÃO
-// ========================================================== 
-
-function adaptarLayout() {
-    const largura = window.innerWidth;
-    
-    if (largura <= 768) {
-        adaptarParaMobile();
-    } else {
-        adaptarParaDesktop();
-    }
-}
-
-function adaptarParaMobile() {
-    const tabela = document.getElementById('tabela-vacinacao');
-    const cardsContainer = document.getElementById('cards-mobile');
-    
-    if (!cardsContainer || !tabela) return; 
-    
-    // Limpa o container e força a recriação dos cards (CRÍTICO)
-    cardsContainer.innerHTML = ''; 
-    
-    const linhas = tabela.querySelectorAll('tbody tr:not(.linha-detalhes)');
-    
-    if (linhas.length === 0) return;
-
-    // Popula o container com os novos cards
-    linhas.forEach((linha, index) => {
-        const celulas = linha.querySelectorAll('td');
-        if (celulas.length >= 6) {
-            const card = document.createElement('div');
-            card.className = 'card-unidade';
-            
-            const contatoElement = linha.nextElementSibling.querySelector('p');
-            const linkMapaElement = linha.nextElementSibling.querySelector('a');
-
-            const contatoTextoCru = contatoElement ? contatoElement.textContent.replace('Contato:', '').trim() : 'Não disponível';
-            const contatoTelefone = contatoTextoCru.replace(/\D/g, ''); 
-            const href = linkMapaElement ? linkMapaElement.getAttribute('href') : '#';
-            const target = linkMapaElement ? linkMapaElement.getAttribute('target') : '_self';
-
-            card.innerHTML = `
-                <h3>${celulas[0].textContent}</h3>
-                <p><strong>📍 Endereço:</strong> ${celulas[1].textContent}</p>
-                <p><strong>📅 Dias:</strong> ${celulas[2].textContent}</p>
-                <p><strong>⏰ Horário:</strong> ${celulas[3].textContent}</p>
-                <p><strong>💉 Dengue:</strong> ${celulas[4].textContent}</p>
-                <p><strong>🦠 Influenza:</strong> ${celulas[5].textContent}</p>
-                <button class="btn-detalhes" onclick="mostrarDetalhesMobile(${index})">📞 Ver Contato & Mapa</button>
-                <div id="detalhes-mobile-${index}" class="detalhes-card" style="display: none;"></div>
-            `;
-            
-            cardsContainer.appendChild(card);
-        }
-    });
-}
-
-function adaptarParaDesktop() {
-    const cardsContainer = document.getElementById('cards-mobile');
-    
-    if (cardsContainer) {
-        cardsContainer.innerHTML = ''; 
-    }
-    
-    // Fechar todas as gavetas no desktop
-    document.querySelectorAll('.box-detalhes').forEach(box => {
-        box.classList.remove('open');
-    });
-    document.querySelectorAll('.linha-ativa').forEach(linha => {
-        linha.classList.remove('linha-ativa');
-    });
-}
-
-// ========================================================== 
-// 5. FUNÇÃO PARA DETALHES MOBILE (Gera os botões laranja)
-// ========================================================== 
-
-function mostrarDetalhesMobile(index) {
-    const detalhes = document.getElementById(`detalhes-mobile-${index}`);
-    const botao = document.querySelector(`.card-unidade:nth-child(${index + 1}) .btn-detalhes`);
-    const estaVisivel = detalhes.style.display !== 'none';
-    
-    // Esconder todos os detalhes primeiro e resetar o texto do botão
-    document.querySelectorAll('.detalhes-card').forEach((d, i) => {
-        d.style.display = 'none';
-        const currentButton = document.querySelector(`.card-unidade:nth-child(${i + 1}) .btn-detalhes`);
-        if (currentButton) {
-            currentButton.textContent = '📞 Ver Contato & Mapa';
-        }
-    });
-    
-    // Mostrar/ocultar os detalhes clicados
-    if (!estaVisivel) {
-        const tabela = document.getElementById('tabela-vacinacao');
-        const linhaDetalhes = tabela.querySelectorAll('tbody tr.linha-detalhes')[index];
-        
-        if (linhaDetalhes) {
-            // 1. Extrai o texto do Contato
-            const contatoElement = linhaDetalhes.querySelector('p');
-            const linkMapaElement = linhaDetalhes.querySelector('a');
-            
-            const contatoTextoCru = contatoElement ? contatoElement.textContent.replace('Contato:', '').trim() : 'Não disponível';
-            const contatoTelefone = contatoTextoCru.replace(/\D/g, ''); 
-            const href = linkMapaElement ? linkMapaElement.getAttribute('href') : '#';
-            const target = linkMapaElement ? linkMapaElement.getAttribute('target') : '_self';
-
-            // 2. Monta o HTML FINAL com os wrappers DIV para os botões laranjas.
-            detalhes.innerHTML = `
-                <p>Contato:</p>
-                <div class="detalhe-content-wrapper">
-                    <div class="btn-detalhe-wrapper contato-btn">
-                        <a href="tel:${contatoTelefone}">
-                            ${contatoTextoCru}
-                        </a>
-                    </div>
-                    
-                    <div class="btn-detalhe-wrapper mapa-btn">
-                        <a target="${target}" href="${href}">
-                            Abrir no Google Maps 🗺️
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
-        
-        detalhes.style.display = 'block';
-        botao.textContent = '👆 Fechar Detalhes';
-    }
-}
-
-
-// ========================================================== 
-// 1. SISTEMA DA GAVETA (PC) - MANTIDO DO SEU CÓDIGO
-// ========================================================== 
-
-function inicializarSistemaGaveta() {
-    const linhasClicaveis = document.querySelectorAll('tbody tr:not(.linha-detalhes)');
-
-    linhasClicaveis.forEach(linha => {
-        linha.addEventListener('click', () => {
-            // Só funciona no desktop (largura > 768px)
-            if (window.innerWidth > 768) {
-                const boxDetalhes = linha.nextElementSibling.querySelector('.box-detalhes');
-                
-                // Fechar todas as outras gavetas
-                document.querySelectorAll('.box-detalhes').forEach(box => {
-                    if (box !== boxDetalhes) {
-                        box.classList.remove('open');
-                        box.parentElement.parentElement.previousElementSibling?.classList.remove('linha-ativa');
-                    }
-                });
-                
-                // Abrir/fechar esta gaveta
-                boxDetalhes.classList.toggle('open');
-                linha.classList.toggle('linha-ativa');
-            }
-        });
-    });
-}
-
-// ========================================================== 
-// 2. SISTEMA RESPONSIVO (MOBILE) - NOVO
-// ========================================================== 
-
-function adaptarLayout() {
-    const largura = window.innerWidth;
-    
-    if (largura <= 768) {
-        adaptarParaMobile();
-    } else {
-        adaptarParaDesktop();
-    }
-}
-
-function adaptarParaMobile() {
-    const tabela = document.getElementById('tabela-vacinacao');
-    const cardsContainer = document.getElementById('cards-mobile');
-    
-    // Se já temos cards, não fazer nada
-    if (cardsContainer.children.length > 0) return;
-    
-    cardsContainer.innerHTML = '';
-    
-    const linhas = tabela.querySelectorAll('tbody tr:not(.linha-detalhes)');
-    
-    linhas.forEach((linha, index) => {
-        const celulas = linha.querySelectorAll('td');
-        if (celulas.length >= 6) {
-            const card = document.createElement('div');
-            card.className = 'card-unidade';
-            
-            card.innerHTML = `
-                <h3>${celulas[0].textContent}</h3>
-                <p><strong>📍 Endereço:</strong> ${celulas[1].textContent}</p>
-                <p><strong>📅 Dias:</strong> ${celulas[2].textContent}</p>
-                <p><strong>⏰ Horário:</strong> ${celulas[3].textContent}</p>
-                <p><strong>💉 Dengue:</strong> ${celulas[4].textContent}</p>
-                <p><strong>🦠 Influenza:</strong> ${celulas[5].textContent}</p>
-                <button class="btn-detalhes" onclick="mostrarDetalhesMobile(${index})">📞 Ver Contato & Mapa</button>
-                <div id="detalhes-mobile-${index}" class="detalhes-card" style="display: none;"></div>
-            `;
-            
-            cardsContainer.appendChild(card);
-        }
-    });
-}
-
-function adaptarParaDesktop() {
-    const cardsContainer = document.getElementById('cards-mobile');
-    const tabela = document.getElementById('tabela-vacinacao');
-    
-    // Limpar cards e mostrar tabela
-    cardsContainer.innerHTML = '';
-    tabela.style.display = 'table';
-    
-    // Fechar todas as gavetas no desktop
-    document.querySelectorAll('.box-detalhes').forEach(box => {
-        box.classList.remove('open');
-    });
-    document.querySelectorAll('.linha-ativa').forEach(linha => {
-        linha.classList.remove('linha-ativa');
-    });
-}
-
-// ========================================================== 
-// 3. FUNÇÃO PARA DETALHES MOBILE
-// ========================================================== 
-
-function mostrarDetalhesMobile(index) {
-    const detalhes = document.getElementById(`detalhes-mobile-${index}`);
-    const estaVisivel = detalhes.style.display !== 'none';
-    
-    // Esconder todos os detalhes primeiro
-    document.querySelectorAll('.detalhes-card').forEach(d => {
-        d.style.display = 'none';
-    });
-    
-    // Mostrar/ocultar os detalhes clicados
-    if (!estaVisivel) {
-        const tabela = document.getElementById('tabela-vacinacao');
-        const linhaDetalhes = tabela.querySelectorAll('tbody tr.linha-detalhes')[index];
-        
-        if (linhaDetalhes) {
-            const contato = linhaDetalhes.querySelector('p')?.textContent || 'Contato não disponível';
-            const linkMapa = linhaDetalhes.querySelector('a')?.outerHTML || 'Mapa não disponível';
-            
-            detalhes.innerHTML = `
-                <p><strong>${contato}</strong></p>
-                <p>${linkMapa}</p>
-            `;
-        }
-        
-        detalhes.style.display = 'block';
-    }
-}
-
-
-// ========================================================== 
-// 3. FUNÇÃO PARA DETALHES MOBILE - Versão Otimizada
-// ========================================================== 
-
-function mostrarDetalhesMobile(index) {
-    const detalhes = document.getElementById(`detalhes-mobile-${index}`);
-    const botao = document.querySelector(`.card-unidade:nth-child(${index + 1}) .btn-detalhes`);
-    const estaVisivel = detalhes.style.display !== 'none';
-    
-    // Esconder todos os detalhes primeiro e resetar o texto do botão
-    document.querySelectorAll('.detalhes-card').forEach((d, i) => {
-        d.style.display = 'none';
-        document.querySelector(`.card-unidade:nth-child(${i + 1}) .btn-detalhes`).textContent = '📞 Ver Contato & Mapa';
-    });
-    
-    // Mostrar/ocultar os detalhes clicados
-    if (!estaVisivel) {
-        const tabela = document.getElementById('tabela-vacinacao');
-        const linhaDetalhes = tabela.querySelectorAll('tbody tr.linha-detalhes')[index];
-        
-        if (linhaDetalhes) {
-            // 1. Extrai o texto do Contato e formata como link tel:
-            const contatoTexto = linhaDetalhes.querySelector('p')?.textContent.replace('Contato:', '').trim() || 'Não disponível';
-            const contatoTelefone = contatoTexto.replace(/\D/g, ''); // Remove todos os não-dígitos
-            const contatoHTML = `<strong>Contato: <a href="tel:${contatoTelefone}">${contatoTexto}</a></strong>`;
-            
-            // 2. Extrai o link do Mapa
-            const linkMapaElement = linhaDetalhes.querySelector('a');
-            const linkMapaHTML = linkMapaElement ? linkMapaElement.outerHTML.replace('Localização no maps.', 'Abrir no Google Maps 🗺️') : 'Mapa não disponível';
-
-            // 3. Monta o HTML no detalhes-card
-            detalhes.innerHTML = `
-                <p>${contatoHTML}</p>
-                <p>${linkMapaHTML}</p>
-            `;
-        }
-        
-        detalhes.style.display = 'block';
-        botao.textContent = '👆 Fechar Detalhes';
-    }
-}
-
