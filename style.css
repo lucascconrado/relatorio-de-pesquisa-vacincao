@@ -329,3 +329,80 @@ h2 {
         justify-content: space-between;
     }
 } 
+
+/* ========================================================== */
+/* 8. ESTILOS PARA SEÇÕES DE ANÁLISE (#resultados) E PROJETO (#sobre) */
+/* ========================================================== */
+
+#resultados, #sobre {
+    padding: 30px 20px;
+    background-color: var(--white);
+}
+
+/* --- Estilo Geral de Parágrafos (Aumenta o Respiro) --- */
+
+#resultados p, #sobre p {
+    margin-bottom: 18px; /* Mais espaço abaixo do parágrafo */
+    line-height: 1.8; /* Aumenta a altura da linha para melhor leitura */
+    font-size: 1.05rem; /* Levemente maior que o padrão */
+    color: #444; /* Cinza escuro para maior conforto visual */
+}
+
+/* --- Destaque do Parágrafo Principal em #sobre --- */
+#sobre p:first-of-type {
+    /* Destaca a descrição principal do projeto com um fundo suave */
+    background-color: #f7fcff; 
+    padding: 18px; /* Mais padding interno */
+    border-radius: 8px; /* Cantos levemente mais arredondados */
+    border-left: 5px solid var(--secondary-color); /* Borda de destaque */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px; /* Mais espaço antes da lista de autores */
+    font-weight: 500; /* Texto com peso um pouco maior */
+}
+
+/* Realça as Estratégias de Coleta (Texto que está com <br> ) */
+#sobre p:last-of-type {
+    /* Pode ser usado para dar um estilo diferente à lista de estratégias */
+    font-style: italic; /* Adiciona itálico para quebrar o padrão */
+    font-size: 0.95rem;
+    color: #666;
+}
+
+
+/* --- Estilo Otimizado da Lista de Autores (#sobre) --- */
+
+#sobre ul {
+    list-style: none; 
+    padding: 0;
+    margin-top: 25px;
+    columns: 1;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#sobre li {
+    font-weight: 500; 
+    font-size: 1.05rem; 
+    color: var(--text-color);
+    
+    border-bottom: 1px solid #eeeeee; 
+    padding: 10px 0; 
+    margin-bottom: 0;
+    
+    background-color: transparent;
+    border-left: none;
+    transition: color 0.2s ease;
+}
+
+#sobre li:hover {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Layout para Desktop (Duas colunas) */
+@media (min-width: 600px) {
+    #sobre ul {
+        columns: 2;
+    }
+}
