@@ -344,37 +344,68 @@ h2 {
     background-color: var(--white);
 }
 
-/* --- Estilo Geral de Parágrafos (Aumenta o Respiro) --- */
+/* --- Estilo Geral de Parágrafos (Leve e Legível) --- */
 
 #resultados p, #sobre p {
-    margin-bottom: 18px; /* Mais espaço abaixo do parágrafo */
-    line-height: 1.8; /* Aumenta a altura da linha para melhor leitura */
-    font-size: 1.05rem; /* Levemente maior que o padrão */
-    color: #444; /* Cinza escuro para maior conforto visual */
+    /* FORMATO E ESPAÇAMENTO */
+    margin-bottom: 22px; 
+    line-height: 1.75; 
+    font-size: 1.05rem;
+    
+    /* COR E PESO VISUAL LEVE */
+    color: var(--text-color);
+    font-weight: 400; /* Removido o negrito */
+    
+    max-width: 95%; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* --- Destaque do Parágrafo Principal em #sobre --- */
+/* --- Destaque do Parágrafo Principal (Apenas tamanho e fundo) --- */
 #sobre p:first-of-type {
-    /* Destaca a descrição principal do projeto com um fundo suave */
-    background-color: #f7fcff; 
-    padding: 18px; /* Mais padding interno */
-    border-radius: 8px; /* Cantos levemente mais arredondados */
-    border-left: 5px solid var(--secondary-color); /* Borda de destaque */
+    /* Mantém a informação importante mais visível, mas sem negrito */
+    font-weight: 400; 
+    font-size: 1.1rem; /* Um pouco maior */
+    color: #444; 
+    
+    /* Fundo e Borda para quebrar a secura */
+    background-color: #f7fcff;
+    padding: 18px;
+    border-radius: 8px;
+    border-left: 5px solid var(--secondary-color);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px; /* Mais espaço antes da lista de autores */
-    font-weight: 500; /* Texto com peso um pouco maior */
+    margin-bottom: 30px;
 }
 
-/* Realça as Estratégias de Coleta (Texto que está com <br> ) */
-#sobre p:last-of-type {
-    /* Pode ser usado para dar um estilo diferente à lista de estratégias */
-    font-style: italic; /* Adiciona itálico para quebrar o padrão */
-    font-size: 0.95rem;
-    color: #666;
+/* --- Estilo da Lista de Resultados (Fichas Azuis Claras) --- */
+
+#resultados ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
 }
 
+#resultados li {
+    /* Listas Mantidas no Tom de Azul */
+    background-color: #f0faff; 
+    border-left: 5px solid var(--secondary-color);
+    padding: 15px 18px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    font-size: 0.98rem;
+    color: var(--text-color);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    font-weight: 400; /* Removido o negrito na lista */
+}
 
-/* --- Estilo Otimizado da Lista de Autores (#sobre) --- */
+#resultados li:hover {
+    background-color: #e3f2fd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Estilo da Lista de Autores (#sobre) --- */
 
 #sobre ul {
     list-style: none; 
@@ -387,14 +418,13 @@ h2 {
 }
 
 #sobre li {
-    font-weight: 500; 
+    /* Lista de Autores Limpa */
+    font-weight: 400; /* Removido o negrito */
     font-size: 1.05rem; 
     color: var(--text-color);
-    
     border-bottom: 1px solid #eeeeee; 
     padding: 10px 0; 
     margin-bottom: 0;
-    
     background-color: transparent;
     border-left: none;
     transition: color 0.2s ease;
@@ -402,12 +432,25 @@ h2 {
 
 #sobre li:hover {
     color: var(--primary-color);
-    font-weight: 700;
+    /* Mantendo a transição de cor para o hover, mas sem negrito */
+    font-weight: 400; 
 }
 
-/* Layout para Desktop (Duas colunas) */
 @media (min-width: 600px) {
     #sobre ul {
         columns: 2;
     }
+}
+
+/* --- Estilo para o Parágrafo de Autores --- */
+#sobre p.realizado {
+    /* Destaca o texto para separar a seção de autores */
+    font-weight: 700; /* Deixa em negrito */
+    font-size: 1.4rem; /* Um pouco maior */
+    color: #82dcfa; /* Usa a cor principal do seu tema (azul) */
+    margin-top: 40px; /* Mais espaço acima para separação clara */
+    margin-bottom: 10px; /* Menos espaço abaixo, pois a lista de nomes vem em seguida */
+    padding: 0; /* Remove padding extra se houver */
+    border-left: none; /* Garante que não tenha borda de destaque de outro parágrafo */
+    background-color: transparent; /* Garante que não tenha fundo */
 }
